@@ -1,4 +1,4 @@
 
 #!/bin/bash
 
-ssh root@10.9.8.2
+sshpass -p '' ssh root@10.9.8.2
