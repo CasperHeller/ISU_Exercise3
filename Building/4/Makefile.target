@@ -1,16 +1,21 @@
 SOURCES = main.cpp part1.cpp part2.cpp
-OBJECTS= ${SOURCES:.cpp=.o}
-EXECUTABLE = parts.target
+DIR = target/
+OBJECTS = ${SOURCES:%.cpp=${DIR}%.o}
+EXECUTABLE = ${DIR}parts.target
 CXX = arm-angstrom-linux-gnueabi-g++
 
-all: ${OBJECTS}
+all: makedir ${OBJECTS}
 	${CXX} -o ${EXECUTABLE} ${OBJECTS}
+
+makedir: 
+	@mkdir ${DIR}
 	
-%.o: %.cpp
+${DIR}%.o: %.cpp
 	${CXX} -c -o $@ $^
 
 clean:
 	@rm ${OBJECTS} ${EXECUTABLE}
-	
+	@rmdir ${DIR}
+
 help:
 	@echo all clean help

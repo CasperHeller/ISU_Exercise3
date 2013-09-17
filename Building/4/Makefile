@@ -1,23 +1,21 @@
 SOURCES = main.cpp part1.cpp part2.cpp
-OBJDIR = host
-OBJECTS = ${addprefix ${OBJDIR}/,${SOURCES:.cpp=.o}}
-EXECUTABLE = ${addprefix ${OBJDIR}/,parts}
+DIR = host/
+OBJECTS = ${SOURCES:%.cpp=${DIR}%.o}
+EXECUTABLE = ${DIR}parts
 CXX = g++
 
-all: ${OBJECTS}
+all: makedir ${OBJECTS}
 	${CXX} -o ${EXECUTABLE} ${OBJECTS}
 	
-${OBJDIR}/%.o: %.c
+makedir: 
+	@mkdir ${DIR}
+	
+${DIR}%.o: %.cpp
 	${CXX} -c -o $@ $^
-	
-${OBJECTS}: | ${OBJDIR}
-	
-${OBJDIR}:
-	@mkdir ${OBJDIR}
-	
+
 clean:
 	@rm ${OBJECTS} ${EXECUTABLE}
-	@rmdir ${OBJDIR}
-	
+	@rmdir ${DIR}
+
 help:
 	@echo all clean help
