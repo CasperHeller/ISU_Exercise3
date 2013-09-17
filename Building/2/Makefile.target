@@ -1,7 +1,7 @@
 SOURCES = hello.cpp
 OBJECTS= ${SOURCES:.cpp=.o}
-EXECUTABLE = hello
-CXX = g++
+EXECUTABLE = hello.target
+CXX = arm-angstrom-linux-gnueabi-g++
 
 all: ${OBJECTS}
 	${CXX} -o ${EXECUTABLE} ${OBJECTS}
